@@ -65,7 +65,7 @@ class Preprocessing:
         except:
             raise ValueError(f"Error at text: {text}")
 
-        return text
+        return " ".join(text)
     
 if __name__ == "__main__":
     pre_proc = Preprocessing()
