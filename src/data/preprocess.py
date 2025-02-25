@@ -7,13 +7,13 @@ from nltk.stem import WordNetLemmatizer
 from pathlib import Path
 
 class Preprocessing:
-    def read_CSV(self, file_name):
+    def read_CSV(self, file_name = 'test.csv'):
         # Get the absolute path of the current file
         current_dir = Path(__file__).resolve().parent
 
         # Navigate two levels up to the project root and access data/test.csv
         csv_path = current_dir.parent.parent / "data" / file_name
-        return pd.read_csv(csv_path).dropna()
+        return pd.read_csv(csv_path, encoding='unicode_escape').dropna()
 
     def pre_clean_text(self, text):
         return re.sub(r'[^A-Za-z(),!?\'\` ]', '', text)
@@ -71,4 +71,3 @@ if __name__ == "__main__":
     pre_proc = Preprocessing()
     df = pre_proc.read_CSV('test.csv')
     print(df.info())
-    # print(pre_proc.preprocess())
