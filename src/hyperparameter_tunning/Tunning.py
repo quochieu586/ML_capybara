@@ -1,5 +1,5 @@
 import optuna
-from VariableSuggest import *
+from .VariableSuggest import *
 from typing import List, Generator
 import pandas as pd
 from sklearn.model_selection import KFold
