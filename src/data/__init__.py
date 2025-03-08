@@ -1,4 +1,4 @@
 from .preprocess import Preprocessing
-from .feature_extraction import FeatureExtraction
+from .feature_extraction import FeatureExtraction, ModelWithTFIDFExtraction
 
-__all__ = ["Preprocessing", "FeatureExtraction"]
+__all__ = ["Preprocessing", "FeatureExtraction", "ModelWithTFIDFExtraction"]

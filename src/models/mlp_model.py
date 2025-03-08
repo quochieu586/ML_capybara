@@ -10,6 +10,7 @@ import sys
 import nltk
 import ssl
 import matplotlib.pyplot as plt
+import torch.nn.functional as F
 
 # Fix SSL issue for NLTK
 try:
@@ -105,6 +106,8 @@ class ComplexMLP(nn.Module):
         x = self.dropout3(x)
 
         x = self.fc4(x)
+        x = F.softmax(x, dim=1)  # Apply softmax to get probabilities
+        return x
         return x
 
 # Define Optuna Optimization Function
