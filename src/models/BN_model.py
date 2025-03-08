@@ -69,7 +69,7 @@ class SentimentBayesianNetwork:
             - result.values (list): A list of probabilities corresponding to each sentiment class.
             - self.labels (list): A list of sentiment labels (e.g., ['negative', 'neutral', 'positive']).
         """
-        words = self.pre_proc.preprocess(text_value)  # Preprocess input text
+        words = self.pre_proc.preprocess(text_value,True)  # Preprocess input text
 
         evidence = {word: 1 for word in words if word in self.vocab}
 
