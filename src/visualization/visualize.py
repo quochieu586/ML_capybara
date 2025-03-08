@@ -57,5 +57,5 @@ def compute_f1_score(y_true, y_pred):
         y_pred (array): Predicted labels.
     """
     f1 = f1_score(y_true, y_pred, average="macro")  # Macro-average F1-score
-    print(f"Final F1-Score: {f1:.4f}")
+    # print(f"Final F1-Score: {f1:.4f}")
     return f1
