@@ -67,8 +67,11 @@ class Preprocessing:
                 text = func(text)
         except:
             raise ValueError(f"Error at text: {text}")
-
-        return text
+        if return_tokens:
+            # print(text)
+            return text
+        else:
+            return None
     
     
 if __name__ == "__main__":
