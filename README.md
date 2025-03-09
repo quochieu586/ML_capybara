@@ -138,11 +138,11 @@ For each model, we follow the below pipeline:
         </tr>
         <tr>
             <td>Bayes Network</td>
-            <td>0.3878</td>
-            <td>0.3840</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>0.55</td>
+            <td>0.5537</td>
+            <td>0.80</td>
+            <td>0.78</td>
+            <td>0.64</td>
         </tr>
     </tbody>
 </table>

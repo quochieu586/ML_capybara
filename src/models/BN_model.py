@@ -3,7 +3,7 @@ from pgmpy.inference import VariableElimination
 from pgmpy.factors.discrete import TabularCPD
 from collections import Counter
 from itertools import product
-
+import nltk
 
 class SentimentBayesianNetwork:
     def __init__(self, df, pre_proc):
@@ -69,7 +69,7 @@ class SentimentBayesianNetwork:
             - result.values (list): A list of probabilities corresponding to each sentiment class.
             - self.labels (list): A list of sentiment labels (e.g., ['negative', 'neutral', 'positive']).
         """
-        words = self.pre_proc.preprocess(text_value)  # Preprocess input text
+        words = self.pre_proc.preprocess(text_value,True)  # Preprocess input text
 
         evidence = {word: 1 for word in words if word in self.vocab}
 
@@ -106,13 +106,15 @@ class SentimentBayesianNetwork:
             raise ValueError("Dataset must contain 'text' and 'sentiment' columns")
 
         # Process text column for entire dataset at once
-        df.loc[:, 'processed_text'] = df['text'].apply(pre_proc.preprocess)
-
+        df["processed_text"] = df["text"].apply(lambda x: pre_proc.preprocess(x, return_tokens=True))
+        
 
         vocabulary = set()
+        
         for tokens in df['processed_text']:
             vocabulary.update(tokens)  # Add words to the vocabulary set, note: update expect an iterable not a literal
 
+        print("Vocavulary size: ", len(vocabulary))
         # Create a Counter for each sentiment also add-1
         sentiment_word_counts = {sentiment: Counter() for sentiment in df['sentiment'].unique()}
         for sentiment in df['sentiment'].unique():
@@ -122,7 +124,7 @@ class SentimentBayesianNetwork:
         for sentiment, group in df.groupby('sentiment'):
             for tokens in group['processed_text']:
                 sentiment_word_counts[sentiment].update(tokens)
-
+        
         return sentiment_word_counts, vocabulary
 
     def view_data(self):

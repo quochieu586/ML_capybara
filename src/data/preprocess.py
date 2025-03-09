@@ -54,7 +54,10 @@ class Preprocessing:
         
         return [self._lemmatizer.lemmatize(token) for token in tokens]
     
-    def preprocess(self, text):
+    def preprocess(self, text, return_tokens=False):
+        
+            
+        
         func_list = [self.pre_clean_text, self.pre_text_lowercase, 
                      self.pre_remove_punctuation, self.pre_tokenize,
                      self.pre_remove_stopwords, self.pre_lemmatize]
@@ -64,8 +67,12 @@ class Preprocessing:
                 text = func(text)
         except:
             raise ValueError(f"Error at text: {text}")
-
-        return " ".join(text)
+        if return_tokens:
+            # print(text)
+            return text
+        else:
+            return None
+    
     
 if __name__ == "__main__":
     pre_proc = Preprocessing()
