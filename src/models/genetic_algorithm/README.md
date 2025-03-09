@@ -46,22 +46,25 @@ In our model, we consider tuning the following hyperparamters:
 
 We shown the results of model prediction on test set as follows:
 
-+ **Accuracy**: 0.4040 (0.4047 accuracy in training set)
++ **Accuracy**: 0.3126
 
-+ **F1-score**: 0.1918
++ **F1-score**: 0.1665
 
-+ **AUC-ROC**: can not be computed due to the lack of multiple classes in predictions
++ **AUC-ROC**:
+    + Negative: 0.5044
+    + Neural: 0.4918
+    + Positive: 0.5233
 
-### Result analysis
-The genetic agorithm shows a poor performance since it only predicts 1 label for all examples. The problem may be from **mutation** strategy. Difference from traditional Genetic Algorithm where the unit of string is a bit (hence, finite search space), with float number, it cover a wider (infinite) hypothesis search space. Also, compared with normal neural network, gradient descent allows the reasonable updating while the mutation updating is completely random which make model hard to converge.
+### Comment on result
+The genetic agorithm shows a poor performance since its accuracy even less than the base model. Some weakness is discussed in the next part. Additional, another potential problem may be from **mutation** strategy. Difference from traditional Genetic Algorithm where the unit of string is a bit (hence, finite search space), with float number, it cover a wider (infinite) hypothesis search space.
 
-### Strength
+## 6. Model strength
 
 + **Gradient-Free Optimization**: GA approach does not require backpropagation and computing gradient descent. Hence, it is good in case the loss function gradient is non-differentiable.
 
 + **Global Search Ability**: Normal neural network can be stuck in local optimal while GA does not. It explores a larger search space.
 
-### Weakness
+## 7. Model weakness
 
 + **Computationally Expensive**: GA works on many neural network models (population). During training, forwarding data to compute fitness scores makes this model slower than traditional neural network a lot.
 
