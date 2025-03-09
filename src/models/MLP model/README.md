@@ -24,21 +24,24 @@ The model's performance was evaluated using the following metrics:
 3. **AUC-ROC**: The Area Under the Receiver Operating Characteristic Curve, which evaluates the model's ability to distinguish between classes.
 
 ### Results:
-- **Final Test Accuracy**: 0.4407
-- **Final F1-Score**: 0.2777
-- **Final AUC-ROC**: 0.7610
+- **Accuracy**: 0.4040
+- **F1-Score**: 0.1918
+- **AUC-ROC**:
+    + Negative: 0.8060
+    + Neural: 0.6742
+    + Positive: 0.7613
 
 ## Model Strengths
-1. **AUC-ROC**: The model performs relatively well with an AUC-ROC score of 0.7610. This indicates that the model is capable of distinguishing between classes in the dataset. The AUC-ROC value suggests a good trade-off between the true positive rate (sensitivity) and the false positive rate (1-specificity).
+1. **AUC-ROC**: The model performs relatively well with AUC-ROC scores for each model. This indicates that the model is capable of distinguishing between classes in the dataset. The AUC-ROC value suggests a good trade-off between the true positive rate (sensitivity) and the false positive rate (1-specificity).
    
 2. **Flexibility**: The model uses a flexible architecture that can be adapted to other classification tasks by changing the input features and output layers.
 
 3. **Hyperparameter Optimization**: The model was fine-tuned using Optuna, which helps in optimizing the key hyperparameters and improving the model's performance over random search or manual tuning.
 
 ## Model Weaknesses and Areas for Improvement
-1. **Accuracy**: The final accuracy of the model is relatively low at **44.07%**, indicating that the model has not fully learned to predict the correct classes. This could be due to various factors, including insufficient training data, suboptimal architecture, or noisy features.
+1. **Accuracy**: The final accuracy of the model is relatively low at **40.40%**, indicating that the model has not fully learned to predict the correct classes. This could be due to various factors, including insufficient training data, suboptimal architecture, or noisy features.
    
-2. **F1-Score**: The **F1-score** of 0.2777 is also quite low. This suggests that while the model might be able to predict some of the classes correctly, it has a high rate of false positives or false negatives, which impacts the precision and recall.
+2. **F1-Score**: The **F1-score** of 0.1918 is also quite low. This suggests that while the model might be able to predict some of the classes correctly, it has a high rate of false positives or false negatives, which impacts the precision and recall.
 
 3. **Class Imbalance**: The model's performance may be affected by class imbalance, where one class (likely the neutral class) dominates the training data. If class distribution is heavily skewed, the model may have difficulty learning minority classes.
 
