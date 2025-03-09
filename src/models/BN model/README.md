@@ -20,6 +20,7 @@ The model's performance was evaluated using:
 
 ### **Confusion Matrix**
 - **Final F1-Score**: 0.55
+- **Final Accuracy**: 0.5537
 
 ### **AUC-ROC Scores**
 - **Negative Sentiment:** **0.80** (Good separation)
