@@ -44,8 +44,12 @@ A **Decision Tree** is a supervised learning algorithm that splits data recursiv
 ## 5. Evaluation Metrics
 
 ### **Performance on Test Data**
-- **Accuracy:** 0.60
-- **F1-score:** 0.60
+- **Accuracy:** 0.6243
+- **F1-score:** 0.6255
+- **AUC-ROC**:
+    + Negative: 0.7044
+    + Neural: 0.6165
+    + Positive: 0.7459
 
 ### **Confusion Matrix Analysis**
 | **Actual / Predicted** | **Negative (0)** | **Neutral (1)** | **Positive (2)** |
