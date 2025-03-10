@@ -31,11 +31,11 @@ These 5 models include:
 
 | Member name | ID | Task |
 |----------|----------|----------|
-| Tran Quoc Hieu | 2252217 | ... |
-| Tran Quoc Trung | 2252859 | ... |
-| Nguyen Anh Khoa | 2252352 | ... |
-| Do Quang Hao | 2252352 | ... |
-| Luu Chi Cuong | 2252352 | ... |
+| Tran Quoc Hieu | 2252217 | Genetic Algorithm |
+| Tran Quoc Trung | 2252859 | Naives Bayes |
+| Nguyen Anh Khoa | 2252352 | Graphical Models |
+| Do Quang Hao | 2252352 | Artificial Neural Network |
+| Luu Chi Cuong | 2252352 | Decision Tree |
 
 ## 3. About dataset
 
