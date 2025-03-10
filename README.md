@@ -1,12 +1,15 @@
-# Machine Learning project
+Machine Learning project
+==============
 
-Group: ML_Capybara
+## Group: ML_Capybara
 
 ## Table of Contents
-- [Introduction](#1-dataset)
-- [Group memebers](#2-group-members)
-- [About datset](#3-dataset)
+- [Introduction](#1-introduction)
+- [Group memebers](#2-group-members-and-tasks-distribution)
+- [About dataset](#3-about-dataset)
 - [Process pipeline](#4-process-pipeline)
+- [Model deployment](#5-model-deployment)
+- [Model evaluation](#6-model-evaluation)
 
 ## 1. Introduction
 
@@ -87,7 +90,7 @@ For each model, we follow the below pipeline:
 
     + Graphical Models ([here](src/models/BN%20model/))
 
-## 5. Model evalution
+## 6. Model evaluation
 
 <table>
     <thead>
