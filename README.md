@@ -34,8 +34,9 @@ These 5 models include:
 | Tran Quoc Hieu | 2252217 | Genetic Algorithm |
 | Tran Quoc Trung | 2252859 | Naives Bayes |
 | Nguyen Anh Khoa | 2252352 | Graphical Models |
-| Do Quang Hao | 2252352 | Artificial Neural Network |
-| Luu Chi Cuong | 2252352 | Decision Tree |
+| Do Quang Hao | 2252180 | Artificial Neural Network |
+| Luu Chi Cuong | 2252097 | Decision Tree |
+
 
 ## 3. About dataset
 
@@ -56,6 +57,15 @@ These 5 models include:
 | 6  | Population -2020 | 3534 non-null  | float64 |
 | 7  | Land Area (Km²)  | 3534 non-null  | float64 |
 | 8  | Density (P/Km²)  | 3534 non-null  | float64 |
+
+- The distribution of each classes:
+
+| Class | Count |
+| ----- | ----- |
+| neutral  | 1430 |
+| positive | 1103 |
+| negative | 1001 | 
+
 
 ## 4. Process pipeline
 
@@ -149,4 +159,14 @@ For each model, we follow the below pipeline:
         </tr>
     </tbody>
 </table>
+
+### Result comparisons
+
+- **Accuracy**: Decision Tree has highest accuracy (0.6243), followed by Bayes Network with 0.55. For remaining models, they perform low-level accuracy, especially Genetic Algorithm (0.3126).
+
+- **F1-score**: Decision Tree shows highest F1-score which indicates it can balance precision and recall. Likewise, 2 models that performs neural network, MLP and Genetic Algorithm, have poor performance on F1-score.
+
+- **ROC-AUC Comparison**: MLP performs better score for each class in general than others. Likewise, Decision Tree and Bayes Network show an acceptable scores which indicate that they are capable of distinguishing between classes in the dataset.
+
+In summary, among these model, decision tree has good performance in every metrics. For bayes network, it is slightly weaker than decision tree but still maintain a good performance. Likewise, MLP shows good AUC-ROC scores but has lower accuracy and F1-score which indicates the potential for improvements. Genetic Algorithm, however, is consistently low across all metrics.
 
