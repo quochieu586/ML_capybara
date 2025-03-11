@@ -71,7 +71,7 @@ class Preprocessing:
             # print(text)
             return text
         else:
-            return None
+            return " ".join(text)
     
     
 if __name__ == "__main__":
