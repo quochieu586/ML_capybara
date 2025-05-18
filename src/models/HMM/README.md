@@ -35,7 +35,8 @@ Hyperparameters for the `CategoricalHMM` were tuned manually and semi-automatica
     - **Positive**: precision = 0.45, recall = 0.53, F1 = 0.49
 - **Macro Average F1-Score**: 0.44
 - **Weighted Average F1-Score**: 0.44
-
+### Result Analysis:
+- The current model shows moderate performance, with F1-scores ranging between 0.38 and 0.49 across sentiment classes. The model performs best on Positive and Negative sentiments but struggles with detecting Neutral samples (low recall of 0.31), which suggests it often misses neutral instances. Overall, the model’s accuracy and F1-scores indicate there is significant room for improvement
 ## Model Strengths
 
 1. **Sequence Awareness**: HMMs model word sequences explicitly, unlike bag-of-words or TF-IDF models.
