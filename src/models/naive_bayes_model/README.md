@@ -6,7 +6,13 @@ Naive Bayes is a machine learning model based on Bayesian theory. It assumes tha
 
 ## 2. Key features
 
-Since GNB is already supported by `sklearn`, we only do preprocessing step, feature extraction and fit them into model. The feature includes the TF-IDF vectors, extracted from the `text` column of dataset.
+Since GNB is already supported by `sklearn`, we only do preprocessing step, feature extraction and fit them into model.For the input feature, we setup 2 approaches:
+
+* TF-IDF vectors, extracted from the `text` column of dataset.
+
+* Word embedding.
+
+For each of them, we compare two versions: full input and reduced input using PCA (from section [dimension reduction](../dimension_reduction/README.md)).
 
 ## 3. Hyperparameter tuning
 
@@ -16,20 +22,66 @@ In this model, we consider the following hyperparameter for tuning:
 
 - **NB_var_smoothing**: the smoothing variable of Naive Bayes model
 
-## 4. Results 
+## 4. Results
 
-- **Accuracy**: 0.4305
-
-- **F1-score**: 0.3868
-
-- **AUC-ROC**: 
-    + Negative: 0.6271
-    + Neural: 0.5424
-    + Positive: 0.6361
+<table>
+    <thead>
+        <tr>
+            <th rowspan=2>Model</th>
+            <th rowspan=2>Accuracy</th>
+            <th rowspan=2>F1-score</th>
+            <th colspan=3>ROC-AUC</th>
+            <th rowspan=2>Input dim</th>
+        </tr>
+        <tr>
+            <th>Negative</th>
+            <th>Neural</th>
+            <th>Positive</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>NB using Tf-idf</td>
+            <td>0.5068</td>
+            <td>0.5224</td>
+            <td>0.7252</td>
+            <td>0.6844</td>
+            <td>0.8002</td>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <td>NB using Tf-idf with PCA</td>
+            <td>0.4052</td>
+            <td>0.4052</td>
+            <td>0.6068</td>
+            <td>0.5418</td>
+            <td>0.6212</td>
+            <td>485</td>
+        </tr>
+        <tr>
+            <td>NB using word vectorizing</td>
+            <td>0.5351</td>
+            <td>0.5332</td>
+            <td>0.7427</td>
+            <td>0.6572</td>
+            <td>0.7719</td>
+            <td>300</td>
+        </tr>
+        <tr>
+            <td>NB using word vectorizing with PCA</td>
+            <td>0.5976</td>
+            <td>0.5969</td>
+            <td>0.8041</td>
+            <td>0.7055</td>
+            <td>0.8067</td>
+            <td>20</td>
+        </tr>
+    </tbody>
+</table>
 
 ### Result analysis
 
-The model correctly classifies about 44.19% correct. This is not a high performance but is not terrible, compared with base model (predict all element as 'neural' class - 40.40%).
+When using tf-idf as input feature, the model that uses reduced input performs lower performance as its parameter is 485 compared to 1000. However, for word embedding approach, it is extremely suprise that, model that use reduces input performs better than the original one. This result shows that 20 most important features is better for training than the whole 300.
 
 ### Strengthness
 
