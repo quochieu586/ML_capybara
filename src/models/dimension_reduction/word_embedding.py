@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 import numpy as np
+import re
 
 import gensim.downloader as api
 from gensim.models import KeyedVectors
@@ -28,6 +29,8 @@ class WordEmbeddingVectors:
         print(f"Loader model successfully ! Vector size: {self.model.vector_size}")
 
     def vectorize_sentence(self, sentence):
+        if type(sentence) is str:
+            sentence = re.split(' ', sentence)
         vectors = [self.model[word] for word in sentence if word in self.model]
         if vectors:
             return np.mean(vectors, axis=0)

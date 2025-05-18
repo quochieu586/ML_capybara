@@ -36,6 +36,10 @@ def ensure_nltk_resources(resources=None):
 
 
 class Preprocessing:
+    def __init__(self):
+        # Download resource
+        ensure_nltk_resources()
+
     def read_CSV(self, file_name = 'test.csv'):
         # Get the absolute path of the current file
         current_dir = Path(__file__).resolve().parent
@@ -100,20 +104,20 @@ class Preprocessing:
             return " ".join(text)
     
     
-    def tokenize_preprocessing(self, text, return_token=False):
-        # Download resource
-        ensure_nltk_resources()
-
+    def tokenize_preprocessing(self, text, return_token=True):
         text = text.lower()
         text = text.translate(str.maketrans('', '', string.punctuation))
         tokens = nltk.word_tokenize(text)
-
-        lemmatizer = WordNetLemmatizer()
-        tokens = [lemmatizer.lemmatize(word) for word in tokens]
-
+        
+        # Remove stopword
         stop_words = set(stopwords.words('english'))
         tokens = [word for word in tokens if word not in stop_words]
 
+        # Lemmatize
+        lemmatizer = WordNetLemmatizer()
+        tokens = [lemmatizer.lemmatize(word) for word in tokens]
+
+        # Remove number and particular name tokens
         pos_tags = pos_tag(tokens)
         processed_tokens = []
         for word, tag in pos_tags:
