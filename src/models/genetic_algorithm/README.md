@@ -46,14 +46,14 @@ In our model, we consider tuning the following hyperparamters:
 
 We shown the results of model prediction on test set as follows:
 
-+ **Accuracy**: 0.3126
++ **Accuracy**: 0.1511
 
-+ **F1-score**: 0.1665
++ **F1-score**: 0.1511
 
 + **AUC-ROC**:
-    + Negative: 0.5044
-    + Neural: 0.4918
-    + Positive: 0.5233
+    + Negative: 0.5051
+    + Neural: 0.4825
+    + Positive: 0.5375
 
 ### Comment on result
 The genetic agorithm shows a poor performance since its accuracy even less than the base model. Some weakness is discussed in the next part. Additional, another potential problem may be from **mutation** strategy. Difference from traditional Genetic Algorithm where the unit of string is a bit (hence, finite search space), with float number, it cover a wider (infinite) hypothesis search space.
