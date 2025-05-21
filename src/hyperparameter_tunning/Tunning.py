@@ -19,7 +19,7 @@ class Tunning:
                 params += [value]
             
             model = self.training(train_df, *params)
-            return self.evaluation(model, val_df, *params)
+            return self.evaluation(model, val_df)
         
         study = optuna.create_study(direction=direction)
         study.optimize(objective, n_trials=n_trials, timeout=timeout)
