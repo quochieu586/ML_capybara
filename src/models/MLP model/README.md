@@ -24,12 +24,12 @@ The model's performance was evaluated using the following metrics:
 3. **AUC-ROC**: The Area Under the Receiver Operating Characteristic Curve, which evaluates the model's ability to distinguish between classes.
 
 ### Results:
-- **Accuracy**: 0.4040
-- **F1-Score**: 0.1918
+- **Accuracy**: 0.5059
+- **F1-Score**: 0.3782
 - **AUC-ROC**:
-    + Negative: 0.8060
-    + Neural: 0.6742
-    + Positive: 0.7613
+    + Negative: 0.7498
+    + Neural: 0.6177
+    + Positive: 0.8682
 
 ## Model Strengths
 1. **AUC-ROC**: The model performs relatively well with AUC-ROC scores for each model. This indicates that the model is capable of distinguishing between classes in the dataset. The AUC-ROC value suggests a good trade-off between the true positive rate (sensitivity) and the false positive rate (1-specificity).
