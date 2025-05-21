@@ -5,8 +5,41 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from pathlib import Path
+from nltk.tag import pos_tag
+
+# Make sure that all resource of model has been downloaded
+NLTK_RESOURCES = {
+    'punkt': 'tokenizers/punkt',
+    'stopwords': 'corpora/stopwords',
+    'wordnet': 'corpora/wordnet',
+    'averaged_perceptron_tagger': 'taggers/averaged_perceptron_tagger',
+}
+
+def ensure_nltk_resources(resources=None):
+    """
+    Check if NLTK resources are available, download them if not.
+    
+    :param resources: List of resource names to ensure (from NLTK_RESOURCES). If None, all will be checked.
+    """
+    resources = resources or NLTK_RESOURCES.keys()
+    for name in resources:
+        resource_path = NLTK_RESOURCES.get(name)
+        if not resource_path:
+            print(f"Unknown resource: {name}")
+            continue
+        try:
+            nltk.data.find(resource_path)
+            print(f"✓ '{name}' is already available.")
+        except LookupError:
+            print(f"✗ '{name}' not found. Downloading...")
+            nltk.download(name)
+
 
 class Preprocessing:
+    def __init__(self):
+        # Download resource
+        ensure_nltk_resources()
+
     def read_CSV(self, file_name = 'test.csv'):
         # Get the absolute path of the current file
         current_dir = Path(__file__).resolve().parent
@@ -55,9 +88,6 @@ class Preprocessing:
         return [self._lemmatizer.lemmatize(token) for token in tokens]
     
     def preprocess(self, text, return_tokens=False):
-        
-            
-        
         func_list = [self.pre_clean_text, self.pre_text_lowercase, 
                      self.pre_remove_punctuation, self.pre_tokenize,
                      self.pre_remove_stopwords, self.pre_lemmatize]
@@ -73,6 +103,34 @@ class Preprocessing:
         else:
             return " ".join(text)
     
+    
+    def tokenize_preprocessing(self, text, return_token=True):
+        text = text.lower()
+        text = text.translate(str.maketrans('', '', string.punctuation))
+        tokens = nltk.word_tokenize(text)
+        
+        # Remove stopword
+        stop_words = set(stopwords.words('english'))
+        tokens = [word for word in tokens if word not in stop_words]
+
+        # Lemmatize
+        lemmatizer = WordNetLemmatizer()
+        tokens = [lemmatizer.lemmatize(word) for word in tokens]
+
+        # Remove number and particular name tokens
+        pos_tags = pos_tag(tokens)
+        processed_tokens = []
+        for word, tag in pos_tags:
+            if re.fullmatch(r'\d+', word):  # If token is a number
+                continue
+            elif tag in ['NNP', 'NNPS']:  # Proper nouns (singular/plural)
+                continue
+            processed_tokens.append(word)
+
+        if not return_token:
+            return ' '.join(processed_tokens)
+        
+        return processed_tokens
     
 if __name__ == "__main__":
     pre_proc = Preprocessing()
