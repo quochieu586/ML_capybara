@@ -53,8 +53,8 @@ We shown the results of model prediction on test set of two models as follows:
     <thead>
         <tr>
             <th rowspan=2>Model</th>
-            <th rowspan=2>Accuracy (%)</th>
-            <th rowspan=2>F1-score (%)</th>
+            <th rowspan=2>Accuracy</th>
+            <th rowspan=2>F1-score</th>
             <th colspan=3>ROC-AUC</th>
             <th rowspan=2>Training time per epoch (second)</th>
             <th rowspan=2>Learning rate</th>
