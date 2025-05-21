@@ -15,7 +15,7 @@ This project focuses on building a text classification model using a **Complex M
 - **Output Layer**: The output layer uses a softmax activation function to predict the probability of each sentiment class (negative, neutral, or positive).
 
 ## Hyperparameter Tuning
-The model's hyperparameters were optimized using **Optuna**, a hyperparameter optimization framework, to find the best configuration for **dropout rate** and **L2 regularization**. The model was trained for 15 epochs to ensure convergence.
+The model's hyperparameters were optimized using **Optuna**, a hyperparameter optimization framework, to find the best configuration for **learning rate** and **hidden layer**. The model was trained for 10 epochs to ensure convergence. Also, early stopping is setup in which the training process is stopped as the validation accuracy does not improve after a predefined threshold.
 
 ## Evaluation Metrics
 The model's performance was evaluated using the following metrics:
@@ -24,12 +24,12 @@ The model's performance was evaluated using the following metrics:
 3. **AUC-ROC**: The Area Under the Receiver Operating Characteristic Curve, which evaluates the model's ability to distinguish between classes.
 
 ### Results:
-- **Accuracy**: 0.5059
-- **F1-Score**: 0.3782
+- **Accuracy**: 0.6984
+- **F1-Score**: 0.6984
 - **AUC-ROC**:
-    + Negative: 0.7498
-    + Neural: 0.6177
-    + Positive: 0.8682
+    + Negative: 0.8672
+    + Neural: 0.7967
+    + Positive: 0.8987
 
 ## Model Strengths
 1. **AUC-ROC**: The model performs relatively well with AUC-ROC scores for each model. This indicates that the model is capable of distinguishing between classes in the dataset. The AUC-ROC value suggests a good trade-off between the true positive rate (sensitivity) and the false positive rate (1-specificity).
@@ -39,9 +39,9 @@ The model's performance was evaluated using the following metrics:
 3. **Hyperparameter Optimization**: The model was fine-tuned using Optuna, which helps in optimizing the key hyperparameters and improving the model's performance over random search or manual tuning.
 
 ## Model Weaknesses and Areas for Improvement
-1. **Accuracy**: The final accuracy of the model is relatively low at **40.40%**, indicating that the model has not fully learned to predict the correct classes. This could be due to various factors, including insufficient training data, suboptimal architecture, or noisy features.
-   
-2. **F1-Score**: The **F1-score** of 0.1918 is also quite low. This suggests that while the model might be able to predict some of the classes correctly, it has a high rate of false positives or false negatives, which impacts the precision and recall.
+1. **Unstable training**: as shown in tuning process, MLP depends strongly on the initialization point. Most models stop at very earlier (break by Early stopping scheme). For model with best tuning result, the validation accuracy reduces after first epoch which shows the **overfitting**.
+
+1. **Accuracy** and **F1-Score**: the accuracy and f1-score of models are both 0.6884 which is not perfect but relative high compared to others. This could be due to various factors, including insufficient training data, or noisy features.
 
 3. **Class Imbalance**: The model's performance may be affected by class imbalance, where one class (likely the neutral class) dominates the training data. If class distribution is heavily skewed, the model may have difficulty learning minority classes.
 
