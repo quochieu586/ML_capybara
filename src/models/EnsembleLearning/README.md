@@ -27,20 +27,25 @@ The model's performance is evaluated using:
 
 |               | Predicted: negative | Predicted: neutral | Predicted: positive |
 |---------------|--------------------|--------------------|---------------------|
-| **True: negative** | 445                | 484                | 72                  |
-| **True: neutral**  | 273                | 987                | 170                 |
-| **True: positive** | 152                | 390                | 561                 |
+| **True: negative** | 488                | 425                | 88                  |
+| **True: neutral**  | 207                | 1039                | 184                 |
+| **True: positive** | 71                | 367                | 665                 |
 
-- **F1 Score (weighted):** 0.5612
-- **Accuracy :** 0.5640
+- **F1 Score (weighted):** 0.6178
+- **Accuracy :** 0.6203
+- **AUC-ROC :**
+  + Negative: 0.8044
+  + Neural: 0.7404
+  + Positive: 0.8350
+
 ## **Model Strengths**
-1. **Consistent Performance Across Classes**: The model achieves a reasonable balance in classifying all three sentiment classes, with the highest accuracy for the neutral class (987 correct predictions).
+1. **Consistent Performance Across Classes**: The model achieves a reasonable balance in classifying all three sentiment classes, with the highest accuracy for the neutral class (1039 correct predictions).
 2. **Robustness to Class Imbalance**: Despite class imbalance, the model maintains moderate performance across all classes, as reflected in the confusion matrix and F1 score.
 3. **Customizability**: The model allows for tuning of key parameters (learning rate, number of trees, tree depth) to further improve performance.
 
 ## **Model Weaknesses and Areas for Improvement**
-1. **Confusion Between Classes**: There is notable confusion between negative and neutral classes (484 negative samples predicted as neutral).
-2. **Moderate F1 Score**: An F1 score of 0.62 suggests the model can be further optimized for better precision and recall.
+1. **Confusion Between Classes**: There is notable confusion between negative and neutral classes (425 negative samples predicted as neutral).
+2. **Moderate F1 Score**: An F1 score of 0.6203 suggests the model can be further optimized for better precision and recall.
 3. **Computational Complexity**: Training multiple trees sequentially can be computationally expensive.
 
 
@@ -49,4 +54,4 @@ The model's performance is evaluated using:
 - **Parameter Tuning**: Further optimize hyperparameters (learning rate, number of estimators, tree depth) to improve F1 score and reduce class confusion.
 
 ## **Conclusion**
-The Gradient Boosting approach provides a solid baseline for sentiment classification, achieving a weighted F1 score of 0.62. While the model performs best on the neutral class, there is room for improvement in distinguishing between negative and neutral sentiments. Future work should be focusing on using other inputs such as embedding vectors rather than tf-idf to improve performance.
+The Gradient Boosting approach provides a solid baseline for sentiment classification, achieving a weighted F1 score of 0.6203. While the model performs best on the neutral class, there is room for improvement in distinguishing between negative and neutral sentiments. Future work should be focusing on using other inputs such as embedding vectors rather than tf-idf to improve performance.
