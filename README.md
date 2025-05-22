@@ -109,7 +109,7 @@ For ease of observation, each model is implemented in jupyter notebook in separa
 
 ### Assignment 2
 
-For the second assignment, we continue to implement models from Chapter 6 - 10. Detail about each model implementation is put in the corresponding path as follows:
+For the second assignment, we continue to implement models from Chapter 6 - 10. Detail about each model implementation is put in the README file of the corresponding path as follows:
 
 - Graphical Model - Hidden Markov model ([here](src/models/HMM/))
 
@@ -193,33 +193,23 @@ We show in this table the result on test set for each model. This includes the i
         </tr>
         <tr>
             <!-- <td>Word embedding</td> -->
-            <td>20 (60% variance after applying PCA)</td>
-            <td>0.4052</td>
-            <td>0.4052</td>
+            <td>30 (60% variance after applying PCA)</td>
+            <td>0.5976</td>
+            <td>0.5969</td>
             <td>0.8041</td>
             <td>0.7055</td>
             <td>0.8067</td>
         </tr>
         <tr>
             <td>Genetic Algorithm (GA)</td>
-            <td>Tf-idf</td>
-            <td>1,000</td>
-            <td>0.3126</td>
-            <td>0.1665</td>
-            <td>0.5044</td>
-            <td>0.4918</td>
-            <td>0.5233</td>
+            <td>Word embedding</td>
+            <td>30 (60% variance after applying PCA)</td>
+            <td>0.4046</td>
+            <td>0.2331</td>
+            <td>0.5075</td>
+            <td>0.4082</td>
+            <td>0.3980</td>
         </tr>
-        <!-- <tr>
-            <td>Bayes Network</td>
-            <td>...</td>
-            <td>...</td>
-            <td>0.55</td>
-            <td>0.5537</td>
-            <td>0.80</td>
-            <td>0.78</td>
-            <td>0.64</td>
-        </tr> -->
         <tr>
             <td>Hidden Markov Model (HMM)</td>
             <td>Tokens sequence</td>
@@ -243,7 +233,7 @@ We show in this table the result on test set for each model. This includes the i
         <tr>
             <td>Emsembler method (EM)</td>
             <td>Word embedding</td>
-            <td>20 (60% variance after applying PCA)</td>
+            <td>30 (60% variance after applying PCA)</td>
             <td>0.6178</td>
             <td>0.6203</td>
             <td>0.8044</td>
@@ -262,7 +252,7 @@ We show in this table the result on test set for each model. This includes the i
         </tr>
         <tr>
             <td>Word embedding</td>
-            <td>20 (60% variance after applying PCA)</td>
+            <td>30 (60% variance after applying PCA)</td>
             <td>0.6347</td>
             <td>0.6315</td>
             <td>0.8130</td>
@@ -276,17 +266,23 @@ In dimensional reduction section, we do not implement a specific model. Instead 
 
 ## 7. Discussion 
 
-- **Input feature**: In our project, we extract and use 2 different feature class: tf-idf and word-embedding. For each model, we choose to implement the suitable input feature approach. Large input feature is not valid for some models due to the hardware limitation. For example, with *EM* and *GA*, they include create a lot of models which cost a lot of space if we choose to implement large tf-idf feature. On the other hand, the input feature of HMM is different from these two due to its different behaviour. It works on the sequence of tokens and determine what the most likely sequence of states that generate this.
+**a. Input feature**: 
 
-- **Hyperparameter tuning**: During implementing, we spend a part of data for model validation as well as hyperparameter tuning for best model. For example, we fine-tune the learning rate and number of hidden nodes for *MLP* and number of estimators as well as max growing depth for generating tree in *EM*. Tuning shows a non-trivial improvement for some model. On the other hand, for some others, due to hardware limitation, they can not be tuned properly leading to low result (*HMM, GA*).
+- In our project, we extract and use 2 different feature class: *tf-idf* and *word embedding*. For each model, we choose to implement the suitable input feature approach. Large input feature is not valid for some models due to the hardware limitation. For example, with *EM* and *GA*, they include create a lot of models which cost a lot of space if we choose to implement large tf-idf feature.
 
-- **Result comparision**: 
+- For *HMM*, the input feature is sequence of tokens which is different from others due to its different behaviour. It works on the sequence of tokens and determine what the most likely sequence of states that generate this.
 
-    + Among these models, not suprisingly, MLP with 1 hidden layer and 50,000 tf-idf input gives the best result since it has the largest number of parameters. However, as we introduce in the corresponding notebook, this model is not stable since it depends strongly on the initialization point and easy to overfit the dataset.
+**b. Size reducing trade-off**: In *NB* and *LR*, we implement 2 feature extraction approaches, with and without PCA reduction, and analyze the result. For *NB*, suprisingly, we observe 2 behaviors: Tf-idf is more efficient without PCA, while word embedding gives better result with PCA application. In *LR*, full tf-idf (50,000 features) and reduced word embedding (30 features) are implemented. The result is reasonable where full tf-idf performs slightly better than reduced word embedding.
 
-    + Logistic regression and Decision tree also show high performances compared with others. These are models that we can utilize the full tf-idf feature and tuning, hence give a better result.
+**c. Hyperparameter tuning**: During implementing, we spend a part of data for model validation as well as hyperparameter tuning for best model. For example, we fine-tune the learning rate and number of hidden nodes for *MLP* and number of estimators as well as max growing depth for generating tree in *EM*. Tuning shows a non-trivial improvement for some model. On the other hand, for some others, due to hardware limitation, they can not be tuned properly leading to low result (*HMM, GA*).
 
-    + On the other hand, *SVM* and *EM*, which use the reduced input, give an acceptable result. When implementing them, we observe that using the full input feature is time-costly and space-costly. Hence, reduced feature using PCA is applied in which it shows a reasonable result.
+**d. Result comparision**: 
 
-    + Finally, among them, *GA* and *HMM* are two models which have lowest performance. For *GA*, we abstract the string of bits by the string (flatten list) of parameters of neural network models. Since it requires creating many neural network models, it costs a lot of space in which we can only use a part (reduced) of input feature and also time-expensive since each training epoch required pass data through many neural networks. For *HMM*, it requires to build different HMMs for each label which requires data-splitting. Hence these models are likely to be underfitting, leading to the poor result.
+- Among these models, not suprisingly, MLP with 1 hidden layer and 50,000 tf-idf input gives the best result since it has the largest number of parameters. However, as we introduce in the corresponding notebook, this model is not stable since it depends strongly on the initialization point and is easy to overfit the dataset.
+
+- *LR* and *DT* also show high performances compared with others. These are models that we can utilize the full tf-idf feature and tuning, hence give a better result. Also, comparing to *MLP*, these models are not suffered from overfitting since they include less parameter.
+
+- On the other hand, *SVM* and *EM*, which use the reduced input, give an acceptable result. When implementing them, we observe that using the full input feature is time-costly and space-costly. Hence, reduced feature using PCA is applied in which it shows a reasonable result.
+
+- Finally, among them, *GA* and *HMM* are two models which have lowest performance. For *GA*, it has the lowest f1-score since it only predicts one label for every samples. Also, it shows an extremely weak ability to distinguish between each class as suggested by the AUC-ROC. Beside poor performance, it is space-expensive since it involves creating many neural network models. For *HMM*, we suffer the problem of data shorteness. This model requires splitting data and build different HMMs for each class. Hence it is likely to be underfitting, leading to a poor result.
 
