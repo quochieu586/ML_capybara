@@ -18,6 +18,8 @@
 
     + *Mutation*: some weights in each children is updated by adding random noises.
 
+- Feature extraction: *Word embedding* with PCA (30 features ~ 60% variance after applying PCA)
+
 ## 3. Model Architecture
 
 - Neural network model:
@@ -36,7 +38,7 @@
 
 In our model, we consider tuning the following hyperparamters:
 
-+ **MAX_FEATURES**: number of features extraction from `TfidfVectorizing`
++ **POP_SIZE**: number of neural networks in population
 
 + **MUTATION_RATE**: rate of weights being mutated during mutation
 
@@ -46,17 +48,17 @@ In our model, we consider tuning the following hyperparamters:
 
 We shown the results of model prediction on test set as follows:
 
-+ **Accuracy**: 0.3126
++ **Accuracy**: 0.4046
 
-+ **F1-score**: 0.1665
++ **F1-score**: 0.2331
 
 + **AUC-ROC**:
-    + Negative: 0.5044
-    + Neural: 0.4918
-    + Positive: 0.5233
+    + Negative: 0.5075
+    + Neural: 0.4082
+    + Positive: 0.3980
 
 ### Comment on result
-The genetic agorithm shows a poor performance since its accuracy even less than the base model. Some weakness is discussed in the next part. Additional, another potential problem may be from **mutation** strategy. Difference from traditional Genetic Algorithm where the unit of string is a bit (hence, finite search space), with float number, it cover a wider (infinite) hypothesis search space.
+The genetic agorithm shows a poor performance since it predicts 1 label (neural) for every sample. A potential problem may be from *mutation* and *crossover* strategy. Difference from traditional Genetic Algorithm where the unit of string is a bit (hence, finite search space), with float number, it cover a wider (infinite) hypothesis search space. Other weaknesses are discussed in the next part.
 
 ## 6. Model strength
 
@@ -66,10 +68,12 @@ The genetic agorithm shows a poor performance since its accuracy even less than 
 
 ## 7. Model weakness
 
-+ **Computationally Expensive**: GA works on many neural network models (population). During training, forwarding data to compute fitness scores makes this model slower than traditional neural network a lot.
++ **Computationally expensive**: GA works on many neural network models (population). During training, forwarding data to compute fitness scores in many models makes this model slower than traditional neural network a lot. 
+
++ **Storage expensive**: Keeping many neural networks in population is very expensive. Hence, it is impossible to use Tf-idf that requires ~10,000 feature for best training. For those reason, we choose to implement a lighter feature which is word embedding with PCA which reduces the feature size to 30.
 
 + **No Fine-Tuning Capability**: GA does not performs incremental learning liked traditional neural network with gradient descent.
 
-+ **Requires Careful Hyperparameter Selection**: Mutation rate, crossover rate, and population size must be tuned. Poor settings can lead to premature convergence or very slow evolution
++ **Requires Careful Hyperparameter Selection**: Mutation rate, crossover rate, and population size must be tuned. Poor settings can lead to premature convergence or very slow evolution. Also, as shown in the notebook, this model depends strongly on the initilization point, but this was solved using hyperparameter tuning.
 
-+ **No Guarantee of Convergence**: Unlike gradient descent (which follows a clear path based on loss gradients), GA randomly explores the space. Hence, it may never find an optimal solution in a reasonable amount of time.
++ **No Guarantee of Convergence**: Unlike gradient descent (which follows a clear path based on loss gradients), GA randomly explores the space. Hence, it may never find an optimal solution in a reasonable amount of time. In our notebook, it shows that these models always convergence to the base model where it always predict a single label for every samples.

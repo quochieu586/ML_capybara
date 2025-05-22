@@ -29,13 +29,17 @@ These 5 models include:
 
 ## 2. Group members and tasks distribution
 
+### Assigment 1
+
 | Member name | ID | Task |
 |----------|----------|----------|
 | Tran Quoc Hieu | 2252217 | Genetic Algorithm |
 | Tran Quoc Trung | 2252859 | Naives Bayes |
-| Nguyen Anh Khoa | 2252352 | Graphical Models |
+| Nguyen Anh Khoa | 2252352 | Graphical Models (Manually Naives Bayes) |
 | Do Quang Hao | 2252180 | Artificial Neural Network |
 | Luu Chi Cuong | 2252097 | Decision Tree |
+
+### Assignment 2
 
 
 ## 3. About dataset
@@ -44,34 +48,35 @@ These 5 models include:
 
 - `sentiment analysis` is the task to classify sentiment (positive, neural, negative) given a document (a list of sentence).
 
-- Our dataset includes more than 3500 examples with about 9 columns. However, for sentiment classification task, we only use 2 columns `texts` (data) and `sentiment` (label). For instance, the summary of this dataset is as follows:
+- This dataset includes training data with 27480 examples and test data with 3534 examples. Each has about 9 columns. For instance, the summary of this dataset is as follows:
 
 |   | Column            | Non-Null Count | Dtype   |
 |----|-------------------|---------------|-------- |
-| 0  | textID           | 3534 non-null  | object  |
-| 1  | text             | 3534 non-null  | object  |
-| 2  | sentiment        | 3534 non-null  | object  |
-| 3  | Time of Tweet    | 3534 non-null  | object  |
-| 4  | Age of User      | 3534 non-null  | object  |
-| 5  | Country          | 3534 non-null  | object  |
-| 6  | Population -2020 | 3534 non-null  | float64 |
-| 7  | Land Area (Km²)  | 3534 non-null  | float64 |
-| 8  | Density (P/Km²)  | 3534 non-null  | float64 |
+| 0  | textID           | 27480 non-null  | object  |
+| 1  | text             | 27480 non-null  | object  |
+| 2  | selected_text    | 27480 non-null  | object  |
+| 3  | sentiment        | 27480 non-null  | object  |
+| 4  | Time of Tweet    | 27480 non-null  | object  |
+| 5  | Age of User      | 27480 non-null  | object  |
+| 6  | Country          | 27480 non-null  | object  |
+| 7  | Population -2020 | 27480 non-null  | float64 |
+| 8  | Land Area (Km²)  | 27480 non-null  | float64 |
+| 9  | Density (P/Km²)  | 27480 non-null  | float64 |
 
-- The distribution of each classes:
+- For sentiment classification task, we only focus on 2 columns `texts` (data) and `sentiment` (label). The distribution of each classes in dataset is as follows:
 
-| Class | Count |
+| Class | Training | Test |
 | ----- | ----- |
-| neutral  | 1430 |
-| positive | 1103 |
-| negative | 1001 | 
+| neutral  | 11117 | 1430 |
+| positive | 8582 | 1103 |
+| negative | 7781 | 1001 | 
 
 
 ## 4. Process pipeline
 
 For each model, we follow the below pipeline:
 
-1. *Data preprocessing*: we utilizes natural language processing (NLP) techniques such as text preprocessing and TF-IDF vectorization for feature extraction.
+1. *Data preprocessing*: This step includes cleaning the text and extracting features from them. In our assignment, we implement 2 kinds of features: Tf-idf and Word Embedding. We shown later characteristics of each feature extration way.
 
 2. *Model tuning*: we utilizes Optuna, a hyperparameter optimization framework. Model is tuned in training set using cross-validation technique. An abstract class of hyperparameter tuning is setup in a separate directory.
 
@@ -88,29 +93,50 @@ For each model, we follow the below pipeline:
 
 ## 5. Model deployment
 
-- For ease of observation, each model is implemented in jupyter notebook in separated directories inside *src/models*, the path is as follows:
+### Assignment 1
 
-    + Decision Tree ([here](src/models/decision_tree/README.md))
+For ease of observation, each model is implemented in jupyter notebook in separated directories inside *src/models*, the path is as follows:
 
-    + Artificial Neural Network ([here](src/models/MLP%20model/README.md))
+- Decision Tree ([here](src/models/decision_tree/))
 
-    + Naives Bayes ([here](src/models/naive_bayes_model/README.md))
+- Artificial Neural Network ([here](src/models/MLP%20model/))
 
-    + Genetic Algorithm ([here](src/models/genetic_algorithm/README.md))
+- Naives Bayes ([here](src/models/naive_bayes_model/))
 
-    + Graphical Models ([here](src/models/BN%20model/))
+- Genetic Algorithm ([here](src/models/genetic_algorithm/))
+
+- Graphical Models ([here](src/models/BN%20model/))
+
+### Assignment 2
+
+For the second assignment, we continue to implement models from Chapter 6 - 10. Detail about each model implementation is put in the README file of the corresponding path as follows:
+
+- Graphical Model - Hidden Markov model ([here](src/models/HMM/))
+
+- Support Vector Machine ([here](src/models/SVM%20model/))
+
+- Dimensional Reduction - Principal Components Analysis ([here](src/models/dimension_reduction/))
+
+- Ensembler Method - Boosting ([here](src/models/EnsembleLearning/))
+
+- Differential Model - Logistic Regression ([here](src/models/logistic_regression/))
 
 ## 6. Model evaluation
+
+We show in this table the result on test set for each model. This includes the input feature (Tf-idf or word embedding) with its size, accuracy, f1-score, ROC-AUC (negative, neural, positive).
 
 <table>
     <thead>
         <tr>
             <th rowspan=2>Model</th>
+            <th colspan=2>Feature</th>
             <th rowspan=2>Accuracy</th>
             <th rowspan=2>F1-score</th>
             <th colspan=3>ROC-AUC</th>
         </tr>
         <tr>
+            <th>Name</th>
+            <th>Size</th>
             <th>Negative</th>
             <th>Neural</th>
             <th>Positive</th>
@@ -118,55 +144,145 @@ For each model, we follow the below pipeline:
     </thead>
     <tbody>
         <tr>
-            <td>Decision Tree</td>
-            <td>0.6243</td>
-            <td>0.6255</td>
-            <td>0.7044</td>
-            <td>0.6165</td>
-            <td>0.7459</td>
+            <td>Decision Tree (DT)</td>
+            <td>Tf-idf</td>
+            <td>25,828</td>
+            <td>0.6919</td>
+            <td>0.6915</td>
+            <td>0.8297</td>
+            <td>0.7743</td>
+            <td>0.8682</td>
         </tr>
         <tr>
-            <td>MLP</td>
-            <td>0.4040</td>
-            <td>0.1918</td>
-            <td>0.8060</td>
-            <td>0.6742</td>
-            <td>0.7613</td>
+            <td>Multi-layer Perceptron (MLP)</td>
+            <td>Tf-idf</td>
+            <td>50,000</td>
+            <td>0.6984</td>
+            <td>0.6984</td>
+            <td>0.8672</td>
+            <td>0.7967</td>
+            <td>0.8987</td>
         </tr>
         <tr>
-            <td>Naive Bayes</td>
-            <td>0.4305</td>
-            <td>0.3868</td>
-            <td>0.6271</td>
-            <td>0.5424</td>
-            <td>0.6361</td>
+            <td rowspan=4>Naive Bayes (NB)</td>
+            <td rowspan=2>Tf-idf</td>
+            <td>1,000</td>
+            <td>0.5068</td>
+            <td>0.5224</td>
+            <td>0.7252</td>
+            <td>0.6844</td>
+            <td>0.8002</td>
         </tr>
         <tr>
-            <td>Genetic Algorithm</td>
-            <td>0.3126</td>
-            <td>0.1665</td>
-            <td>0.5044</td>
-            <td>0.4918</td>
-            <td>0.5233</td>
+            <!-- <td>Tf-idf</td> -->
+            <td>485 (60% variance after applying PCA)</td>
+            <td>0.4052</td>
+            <td>0.4052</td>
+            <td>0.6068</td>
+            <td>0.5418</td>
+            <td>0.6212</td>
         </tr>
         <tr>
-            <td>Bayes Network</td>
-            <td>0.55</td>
-            <td>0.5537</td>
-            <td>0.80</td>
-            <td>0.78</td>
-            <td>0.64</td>
+            <td rowspan=2>Word embedding</td>
+            <td>300</td>
+            <td>0.5351</td>
+            <td>0.5332</td>
+            <td>0.7427</td>
+            <td>0.6572</td>
+            <td>0.7719</td>
+        </tr>
+        <tr>
+            <!-- <td>Word embedding</td> -->
+            <td>30 (60% variance after applying PCA)</td>
+            <td>0.5976</td>
+            <td>0.5969</td>
+            <td>0.8041</td>
+            <td>0.7055</td>
+            <td>0.8067</td>
+        </tr>
+        <tr>
+            <td>Genetic Algorithm (GA)</td>
+            <td>Word embedding</td>
+            <td>30 (60% variance after applying PCA)</td>
+            <td>0.4046</td>
+            <td>0.2331</td>
+            <td>0.5075</td>
+            <td>0.4082</td>
+            <td>0.3980</td>
+        </tr>
+        <tr>
+            <td>Hidden Markov Model (HMM)</td>
+            <td>Tokens sequence</td>
+            <td></td>
+            <td>0.4434</td>
+            <td>0.4372</td>
+            <td>0.4836</td>
+            <td>0.5388</td>
+            <td>0.4763</td>
+        </tr>
+        <tr>
+            <td>Support Vector Machine (SVM)</td>
+            <td>Tf-idf</td>
+            <td>2,878 (90% variance after applying PCA)</td>
+            <td>0.6488</td>
+            <td>0.6509</td>
+            <td>0.8299</td>
+            <td>0.7309</td>
+            <td>0.8549</td>
+        </tr>
+        <tr>
+            <td>Emsembler method (EM)</td>
+            <td>Word embedding</td>
+            <td>30 (60% variance after applying PCA)</td>
+            <td>0.6178</td>
+            <td>0.6203</td>
+            <td>0.8044</td>
+            <td>0.7404</td>
+            <td>0.8350</td>
+        </tr>
+        <tr>
+            <td rowspan=2>Logistic regression (LR)</td>
+            <td>Tf-idf</td>
+            <td>50,000</td>
+            <td>0.6811</td>
+            <td>0.6822</td>
+            <td>0.8638</td>
+            <td>0.7695</td>
+            <td>0.8955</td>
+        </tr>
+        <tr>
+            <td>Word embedding</td>
+            <td>30 (60% variance after applying PCA)</td>
+            <td>0.6347</td>
+            <td>0.6315</td>
+            <td>0.8130</td>
+            <td>0.7378</td>
+            <td>0.8149</td>
         </tr>
     </tbody>
 </table>
 
-### Result comparisons
+In dimensional reduction section, we do not implement a specific model. Instead we introduce a reduced input feature which is used by other model and compared with original one.
 
-- **Accuracy**: Decision Tree has highest accuracy (0.6243), followed by Bayes Network with 0.55. For remaining models, they perform low-level accuracy, especially Genetic Algorithm (0.3126).
+## 7. Discussion 
 
-- **F1-score**: Decision Tree shows highest F1-score which indicates it can balance precision and recall. Likewise, 2 models that performs neural network, MLP and Genetic Algorithm, have poor performance on F1-score.
+**a. Input feature**: 
 
-- **ROC-AUC Comparison**: MLP performs better score for each class in general than others. Likewise, Decision Tree and Bayes Network show an acceptable scores which indicate that they are capable of distinguishing between classes in the dataset.
+- In our project, we extract and use 2 different feature class: *tf-idf* and *word embedding*. For each model, we choose to implement the suitable input feature approach. Large input feature is not valid for some models due to the hardware limitation. For example, with *EM* and *GA*, they include create a lot of models which cost a lot of space if we choose to implement large tf-idf feature.
 
-In summary, among these model, decision tree has good performance in every metrics. For bayes network, it is slightly weaker than decision tree but still maintain a good performance. Likewise, MLP shows good AUC-ROC scores but has lower accuracy and F1-score which indicates the potential for improvements. Genetic Algorithm, however, is consistently low across all metrics.
+- For *HMM*, the input feature is sequence of tokens which is different from others due to its different behaviour. It works on the sequence of tokens and determine what the most likely sequence of states that generate this.
+
+**b. Size reducing trade-off**: In *NB* and *LR*, we implement 2 feature extraction approaches, with and without PCA reduction, and analyze the result. For *NB*, suprisingly, we observe 2 behaviors: Tf-idf is more efficient without PCA, while word embedding gives better result with PCA application. In *LR*, full tf-idf (50,000 features) and reduced word embedding (30 features) are implemented. The result is reasonable where full tf-idf performs slightly better than reduced word embedding.
+
+**c. Hyperparameter tuning**: During implementing, we spend a part of data for model validation as well as hyperparameter tuning for best model. For example, we fine-tune the learning rate and number of hidden nodes for *MLP* and number of estimators as well as max growing depth for generating tree in *EM*. Tuning shows a non-trivial improvement for some model. On the other hand, for some others, due to hardware limitation, they can not be tuned properly leading to low result (*HMM, GA*).
+
+**d. Result comparision**: 
+
+- Among these models, not suprisingly, MLP with 1 hidden layer and 50,000 tf-idf input gives the best result since it has the largest number of parameters. However, as we introduce in the corresponding notebook, this model is not stable since it depends strongly on the initialization point and is easy to overfit the dataset.
+
+- *LR* and *DT* also show high performances compared with others. These are models that we can utilize the full tf-idf feature and tuning, hence give a better result. Also, comparing to *MLP*, these models are not suffered from overfitting since they include less parameter.
+
+- On the other hand, *SVM* and *EM*, which use the reduced input, give an acceptable result. When implementing them, we observe that using the full input feature is time-costly and space-costly. Hence, reduced feature using PCA is applied in which it shows a reasonable result.
+
+- Finally, among them, *GA* and *HMM* are two models which have lowest performance. For *GA*, it has the lowest f1-score since it only predicts one label for every samples. Also, it shows an extremely weak ability to distinguish between each class as suggested by the AUC-ROC. Beside poor performance, it is space-expensive since it involves creating many neural network models. For *HMM*, we suffer the problem of data shorteness. This model requires splitting data and build different HMMs for each class. Hence it is likely to be underfitting, leading to a poor result.
 
