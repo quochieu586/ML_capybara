@@ -10,10 +10,11 @@ Machine Learning project
 - [Process pipeline](#4-process-pipeline)
 - [Model deployment](#5-model-deployment)
 - [Model evaluation](#6-model-evaluation)
+- [Discussion](#7-discussion)
 
 ## 1. Introduction
 
-In the assignment of Machine Learning course, we are required to apply models from chapter 2-6, defined and solved problem on a single dataset.
+In the assignment of Machine Learning course, we are required to apply models from chapter 2-10, defined and solved problem on a single dataset.
 
 These 5 models include:
 
@@ -27,17 +28,25 @@ These 5 models include:
 
 - Graphical Models (Chapter 6)
 
+- Support Vector Machine (Chapter 7)
+
+- Dimensional Reduction (Chapter 8)
+
+- Ensembler Method (Chapter 9)
+
+- Differential Model (Chapter 10)
+
 ## 2. Group members and tasks distribution
 
 ### Assigment 1
 
-| Member name | ID | Task |
-|----------|----------|----------|
-| Tran Quoc Hieu | 2252217 | Genetic Algorithm |
-| Tran Quoc Trung | 2252859 | Naives Bayes |
-| Nguyen Anh Khoa | 2252352 | Graphical Models (Manually Naives Bayes) |
-| Do Quang Hao | 2252180 | Artificial Neural Network |
-| Luu Chi Cuong | 2252097 | Decision Tree |
+| Member name | ID | Assigment 1 | Assigment 2 |
+|----------|----------|----------|----------|
+| Tran Quoc Hieu | 2252217 | Genetic Algorithm | Logistic Regression |
+| Tran Quoc Trung | 2252859 | Naives Bayes | Principal Component Analysis |
+| Nguyen Anh Khoa | 2252352 | Graphical Models (Manually Naives Bayes) | Ensembler Method |
+| Do Quang Hao | 2252180 | Artificial Neural Network | Support Vector Machine |
+| Luu Chi Cuong | 2252097 | Decision Tree | Hidden Markov Model |
 
 ### Assignment 2
 
@@ -65,12 +74,7 @@ These 5 models include:
 
 - For sentiment classification task, we only focus on 2 columns `texts` (data) and `sentiment` (label). The distribution of each classes in dataset is as follows:
 
-| Class | Training | Test |
-| ----- | ----- |
-| neutral  | 11117 | 1430 |
-| positive | 8582 | 1103 |
-| negative | 7781 | 1001 | 
-
+![Sample distribution](image.png)
 
 ## 4. Process pipeline
 

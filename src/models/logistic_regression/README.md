@@ -6,7 +6,7 @@ Logistic Regression is a basic machine learning model used in the classification
 
 ## 2. Key Features
 
-Since our task is 3-classes classification, we implement multi-class logistic regression in which it uses **softmax** function instead of **sigmoid** (used for binary classification). For instance, our model predicts probabilities for each class. It maps outputs of the linear discrimant function, $y = Wx + b$, into probabilities (value between 0 and 1) that sum to 1 by passing $y$ through the softmax function. Given N samples $\left\{(x_i,y_i) | i=\overline{1,N} \right\}$, where $y_i \in $ {Positive, Neural, Negative}, the objective is to maximize
+Since our task is 3-classes classification, we implement multi-class logistic regression in which it uses **softmax** function instead of **sigmoid** (used for binary classification). For instance, our model predicts probabilities for each class. It maps outputs of the linear discrimant function, $y = Wx + b$, into probabilities (value between 0 and 1) that sum to 1 by passing $y$ through the softmax function. Given N samples {$(x_i,y_i) | i=\overline{1,N}$}, where $y_i \in $ {Positive, Neural, Negative}, the objective is to maximize
 $$H = \prod_{i=1}^N P(y = y_i | x_i)$$
 
 It is equivalent with minimizing the loss function:
