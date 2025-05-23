@@ -16,7 +16,7 @@ Machine Learning project
 
 In the assignment of Machine Learning course, we are required to apply models from chapter 2-10, defined and solved problem on a single dataset.
 
-These 5 models include:
+These models include:
 
 - Decision Tree (Chapter 2)
 
@@ -38,8 +38,6 @@ These 5 models include:
 
 ## 2. Group members and tasks distribution
 
-### Assigment 1
-
 | Member name | ID | Assigment 1 | Assigment 2 |
 |----------|----------|----------|----------|
 | Tran Quoc Hieu | 2252217 | Genetic Algorithm | Logistic Regression |
@@ -47,9 +45,6 @@ These 5 models include:
 | Nguyen Anh Khoa | 2252352 | Graphical Models (Manually Naives Bayes) | Ensembler Method |
 | Do Quang Hao | 2252180 | Artificial Neural Network | Support Vector Machine |
 | Luu Chi Cuong | 2252097 | Decision Tree | Hidden Markov Model |
-
-### Assignment 2
-
 
 ## 3. About dataset
 
